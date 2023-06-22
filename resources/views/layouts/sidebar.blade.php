@@ -1,7 +1,9 @@
-<div class="row">
+<div class="row flex-xl-nowrap">
+    
     <div class="col-md-3" style="height: 100%;">
         <!-- Sidebar content goes here -->
-        <div class="flex-shrink-0 p-3" style="position: sticky; width: 280px; height: 100%; background: #ddd; overflow-y: auto;">
+       <nav>
+        <div class="flex-shrink-0 p-3" style="position: sticky; width: 280px; height: 100%; background: #ddd; ">
             <ul class="list-unstyled ps-0">
 
 
@@ -163,6 +165,7 @@
 
             </ul>
         </div>
+        </nav>
     </div>
 </div>
 

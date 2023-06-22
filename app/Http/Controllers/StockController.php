@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Models\stock;
 use App\Http\Requests\StorestockRequest;
 use App\Http\Requests\UpdatestockRequest;
@@ -13,7 +13,8 @@ class StockController extends Controller
      */
     public function index()
     {
-        //
+       $stock=stock::all();
+      return view('stock.index', compact('stock'));
     }
 
     /**
@@ -21,7 +22,7 @@ class StockController extends Controller
      */
     public function create()
     {
-        //
+       return view('stock.create');
     }
 
     /**
@@ -29,7 +30,21 @@ class StockController extends Controller
      */
     public function store(StorestockRequest $request)
     {
-        //
+      $request->validate([
+            'nomorbarang' => 'required',
+            'namabarang' => 'required',
+            'merek' => 'required',
+            'satuan' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+
+
+        ]);
+
+        
+        Stock::create($request->all());
+      
+        return redirect()->route('stock');
     }
 
     /**
@@ -43,24 +58,20 @@ class StockController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(stock $stock)
-    {
-        //
+   public function edit($id){
+        $stock =Stock::find($id);
+        Return view('stock.edit', compact('stock'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatestockRequest $request, stock $stock)
-    {
-        //
+    public function update(Request $request, $id){
+        $stock =Stock::find($id);
+        $stock->update($request->all());
+        return redirect()->route('stock');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(stock $stock)
-    {
-        //
+    public function destroy($id){
+        $stock =Stock::find($id);
+        $stock->delete();
+        return redirect()->route('stock');
     }
 }

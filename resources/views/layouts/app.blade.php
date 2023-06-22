@@ -14,6 +14,11 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+	<link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link href="https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.bootstrap5.min.css">
+	
 
     <!-- Scripts -->
     <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
@@ -56,7 +61,7 @@
         position: relative;
         z-index: 2;
         height: 2.75rem;
-        overflow-y: hidden;
+       
       }
 
       .nav-scroller .nav {
@@ -98,8 +103,7 @@
 <body>
 
     <div id="app">
-
-        <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm"  >
            <div class="container">
                 <a class="navbar-brand text-light"  href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -161,10 +165,9 @@
 
            @extends('layouts.sidebar')
 
-           <div class="col-md-9 float-end">
-
-<div class="container" >
-    <main class="py-4">
+<div class="col-md-9 float-end">
+<div class="container-fluid" >
+    <main style="height: 100%;">
         @yield('content')
     </main>
 </div>
@@ -174,7 +177,25 @@
     </div>
 
 
-	<script src="sidebars.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+	
 </body>
+<script src="sidebars.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
+	<script> 
+	$(document).ready(function() {
+    var table = $('#data-tabel').DataTable( {
+        fixedHeader: true,
+        pageLength: 5,
+        scrollY: '300px', // Menentukan tinggi scroll vertikal
+      scrollCollapse: true // Mengaktifkan pengguliran saat konten tabel kurang dari tinggi scroll
+    } );
+} );
+	</script>
+   
+		
 </html>

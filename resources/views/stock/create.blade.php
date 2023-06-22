@@ -31,7 +31,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="Merek" class="form-label">Merek</label>
-                            <input type="text" name="Merek" class="form-control @error('Merek') is-invalid @enderror" placeholder="Merek brand" >@error('Merek')
+                            <input type="text" name="merek" class="form-control @error('Merek') is-invalid @enderror" placeholder="Merek brand" >@error('Merek')
                     <div class="alert alert-warning invalid-feedback" >{{ $message }}</div>
                     @enderror
                            
