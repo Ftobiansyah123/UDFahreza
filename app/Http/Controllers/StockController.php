@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\stock;
+use App\Models\Stock;
 use App\Http\Requests\StorestockRequest;
 use App\Http\Requests\UpdatestockRequest;
 
@@ -13,7 +13,7 @@ class StockController extends Controller
      */
     public function index()
     {
-       $stock=stock::all();
+       $stock=Stock::all();
       return view('stock.index', compact('stock'));
     }
 
@@ -50,7 +50,7 @@ class StockController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(stock $stock)
+    public function show(Stock $stock)
     {
         //
     }

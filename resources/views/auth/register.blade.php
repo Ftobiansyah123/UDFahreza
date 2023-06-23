@@ -40,10 +40,17 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="Bagian" class="col-md-4 col-form-label text-md-end">Bagian</label>
+                            <label for="bagian" class="col-md-4 col-form-label text-md-end">{{ __('Bagian') }}</label>
 
                             <div class="col-md-6">
-                                <input id="idbagian"  class="form-control @error('idbagian') is-invalid @enderror" name="idbagian" value="{{ old('bagian') }}" >
+                                <select id="bagian" class="form-control @error('bagian') is-invalid @enderror" name="bagian">
+                                    <option value="">Pilih Bagian</option>
+                                    @foreach(\App\Models\User::getEnumValues('users', 'bagian') as $enumValue)
+                                        <option value="{{ $enumValue }}" {{ old('bagian') == $enumValue ? 'selected' : '' }}>
+                                            {{ $enumValue }}
+                                        </option>
+                                    @endforeach
+                                </select>
 
                                 @error('bagian')
                                     <span class="invalid-feedback" role="alert">

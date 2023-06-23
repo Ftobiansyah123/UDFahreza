@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home')->with('status', 'nda login nah');
+    return view('home')->with('status');
 });
 
 Auth::routes();
@@ -27,5 +27,14 @@ Route::post('/simpan-stock', [App\Http\Controllers\StockController::class, 'stor
 Route::get('edit-stock/{id}', [App\Http\Controllers\StockController::class, 'edit'])->name('stock.edit');
 Route::post('/update-stock/{id}', [App\Http\Controllers\StockController::class, 'update'])->name('stock.update');
 Route::get('hapus-stock/{id}', [App\Http\Controllers\StockController::class, 'destroy'])->name('stock.hapus');
+
+
+//pegawai
+Route::get('/pegawai', [App\Http\Controllers\PegawaiControl::class, 'index'])->name('pegawai');
+Route::get('/pegawai-create', [App\Http\Controllers\PegawaiControl::class, 'create'])->name('pegawai.create');
+Route::post('/simpan-pegawai', [App\Http\Controllers\PegawaiControl::class, 'store'])->name('simpan.pegawai');
+Route::get('edit-pegawai/{id}', [App\Http\Controllers\PegawaiControl::class, 'edit'])->name('pegawai.edit');
+Route::post('/update-pegawai/{id}', [App\Http\Controllers\PegawaiControl::class, 'update'])->name('pegawai.update');
+Route::get('hapus-pegawai/{id}', [App\Http\Controllers\PegawaiControl::class, 'destroy'])->name('pegawai.hapus');
 
 });

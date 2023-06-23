@@ -3,63 +3,57 @@
 namespace App\Http\Controllers;
 
 use App\Models\pegawai;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+  
+    public function index(){
+        $pegawai = Pegawai::with(['user', 'bagian'])->get();
+        return view('pegawai.index', compact('pegawai'));
+    }
+ 
+    public function create() {
+        $user = User::all();
+        return view('pegawai.create', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request) {
+
+         $request->validate([
+            'iduser' => 'required',
+            'idbagian' => 'required',
+            'nomortelepon' => 'required',
+            'alamat' => 'required',
+           
+
+
+        ]);
+        Pegawai::create($request->all());
+        
+        return redirect()->route('pegawai');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function edit($id){
+        $user = User::all();
+        $bagian = Bagian::all();
+        $pegawai =Pegawai::find($id);
+        Return view('pegawai.edit', compact('pegawai','bagian', 'user'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(pegawai $pegawai)
-    {
-        //
+    public function update(Request $request, $id){
+        $pegawai =Pegawai::find($id);
+        $pegawai->update($request->all());
+       
+        return redirect()->route('pegawai');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(pegawai $pegawai)
-    {
-        //
+    public function destroy($id){
+        $pegawai =Pegawai::find($id);
+        $pegawai->delete();
+        
+        return redirect()->route('pegawai');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, pegawai $pegawai)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(pegawai $pegawai)
-    {
-        //
-    }
 }

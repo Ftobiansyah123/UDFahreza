@@ -14,33 +14,36 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered text-sm-right">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nama Pegawai</th>
-                                <th>Bagian</th>
-                                <th>Nomor Telepon</th>
-                                <th>Alamat</th>
-                                <th>Aksi</th>
-                               
-                            </tr>
-                            @php
-                            $id = 1;
-                            @endphp
-                            @foreach ($pegawai as $pg)
-                            <tr>
-                                <td>{{ $id++ }}</td>
-                                <td>{{ $pg->user->name }}</td>
-                                <td>{{ $pg->bagian }}</td>
-                                <td>{{ $pg->nomortelepon }}</td>
-                                <td>{{ $pg->alamat }}</td>
+                            <thead>
+                                    <tr>
+                                    <th>Aksi</th>
+                                        <th>ID</th>
+                                        <th>Nama Pegawai</th>
+                                        <th>Bagian</th>
+                                        <th>Nomor Telepon</th>
+                                        <th>Alamat</th> 
+                                    </tr>
                                 
-                                <td>
-                                <a href={{ route('pegawai.edit', $pg->id) }} class="btn btn-sm btn-warning"><i class="fa fa-edit"></i>EDIT</a>
-                                <a href={{ route('pegawai.hapus', $pg->id) }} class="btn btn-sm btn-danger"><i class="fa fa-eraser"></i>HAPUS</a>
+                            </thead>
+                            <tbody>
+                                @php
+                                $id = 1;
+                                @endphp
+                                @foreach ($pegawai as $pg)
+                                <tr>
+                                    <td>
+                                        <a href={{ route('pegawai.edit', $pg->id) }} class="btn btn-sm btn-warning"><i class="fa fa-edit"></i>EDIT</a>
+                                        <a href={{ route('pegawai.hapus', $pg->id) }} class="btn btn-sm btn-danger"><i class="fa fa-eraser"></i>HAPUS</a>
 
-                                </td>
-                            </tr>
-                            @endforeach
+                                    </td>
+                                    <td>{{ $id++ }}</td>
+                                    <td>{{ $pg->user->name }}</td>
+                                    <td>{{ $pg->bagian }}</td>
+                                    <td>{{ $pg->nomortelepon }}</td>
+                                    <td>{{ $pg->alamat }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>

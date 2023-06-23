@@ -26,19 +26,7 @@
                         </div>
 
 
-                        <div class="row mb-3">
-                            <label for="bagian" class="col-md-4 col-form-label text-md-end">{{ __('bagian') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="bagian"  class="form-control @error('bagian') is-invalid @enderror" name="bagian" value="{{ old('bagian') }}" required autofocus>
-
-                                @error('bagian')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>

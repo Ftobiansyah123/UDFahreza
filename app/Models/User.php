@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -20,8 +22,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'bagian',
         'password',
-        'idbagian',
+        
     ];
 
     /**
@@ -43,4 +46,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+   
+    public static function getEnumValues($table, $column)
+    {
+        $query = "SHOW COLUMNS FROM $table WHERE Field = ?";
+        $bindings = [$column];
+        $result = DB::select($query, $bindings);
+        $type = $result[0]->Type;
+        preg_match('/^enum\((.*)\)$/', $type, $matches);
+        $enumValues = array();
+        foreach (explode(',', $matches[1]) as $value) {
+            $enumValues[] = trim($value, "'");
+        }
+        return $enumValues;
+    }
+    public function pegawai() {
+        return $this->hasOne(Pegawai::class, 'iduser', 'id');
+    }
+    
 }

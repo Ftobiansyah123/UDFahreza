@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('iduser');
-            $table->string('bagian', 50);
             $table->string('nomortelpon', 16);
             $table->string('alamat', 225);
             $table->timestamps();
