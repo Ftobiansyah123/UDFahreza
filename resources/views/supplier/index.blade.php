@@ -8,29 +8,29 @@
                 <div class="card-header">
                     {{ __('Data Supplier') }}
                     <a href={{ route('supplier.create') }} class="btn btn-sm btn-primary float-end "> <i class="fa-solid fa-circle-plus fa-beat" ></i>   Tambah Data</a>
-                     <a href={{ route('cetak_supplier.pdf') }} class="btn btn-sm btn-primary float-left" target="_blank">CETAK PDF</a>
+                    
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered text-sm-right">
+                        <table id="data-tabel" class="table table-bordered text-sm-right">
+                           
+                            <thead>
                             <tr>
+                                <th>Aksi</th>
                                 <th>ID</th>
-                                <th>Nama barang</th>
+                                <th>Nama Supplier</th>
                                 <th>Nomor Telepon</th>
                                 <th>Alamat</th>
-                                <th>Aksi</th>
+                                
                             </tr>
-                             @php
+                            </thead>
+
+                            <tbody>
+                            @php
                         $id = 1;
                     @endphp
                             @foreach ($supplier as $sp)
                             <tr>
-                                <td>{{ $id++ }}</td>
-                                <td>{{ $sp->namasupplier }}</td>
-                                <td>{{ $sp->no_telepon }}</td>
-                                <td>{{ $sp->Alamat }}</td>
-                              
-                                
                                 <td>
                                 <a href={{ route('supplier.edit', $sp->id) }} class="btn btn-sm btn-warning">
                                 <i class="fa fa-edit"></i>    
@@ -40,8 +40,20 @@
                                 HAPUS</a>
 
                                 </td>
+                                <td>{{ $id++ }}</td>
+                                <td>{{ $sp->namasupplier }}</td>
+                                <td>{{ $sp->no_telepon }}</td>
+                                <td>{{ $sp->Alamat }}</td>
+                              
+                                
+                                
                             </tr>
                             @endforeach
+                            </tbody>
+
+                            <tfoot></tfoot>
+
+                             
                         </table>
                     </div>
                 </div>

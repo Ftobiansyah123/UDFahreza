@@ -44,7 +44,7 @@
             <td>{{ $id++ }}</td>
             <td>{{ $st->nomorbarang }}</td>
             <td>{{ $st->namabarang }}</td>
-            <td>{{ $st->Merek }}</td>
+            <td>{{ $st->merek }}</td>
             <td>{{ $st->satuan }}</td>
             <td>{{ $st->harga }}</td>
             <td class="text-center">{{ $st->deskripsi }}</td>
@@ -59,6 +59,7 @@
                     <td class=" text-bold text-end"><b>{{ $st->sum('stok') }}</b></td>
 
             </tr>
+            
         </tfoot>
     </table>
                     </div>

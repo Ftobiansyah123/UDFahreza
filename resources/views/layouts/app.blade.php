@@ -20,6 +20,8 @@
     <link href="https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.bootstrap5.min.css">
 	
 
+   
+
     <!-- Scripts -->
     <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
 	<style>
@@ -98,13 +100,20 @@
 
 
     <!-- Custom styles for this template -->
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+</head>
     <link href="sidebars.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <body>
 
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm"  >
            <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="true" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <a class="navbar-brand text-light"  href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -140,12 +149,12 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} / {{ Auth::user()->role }}
+                                    {{ Auth::user()->name }} / {{ Auth::user()->bagian }}
                                 </a>
                                
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-light" href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -182,8 +191,8 @@
 </body>
 <script src="sidebars.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+ 
     
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
@@ -192,7 +201,7 @@
     var table = $('#data-tabel').DataTable( {
         fixedHeader: true,
         pageLength: 5,
-        scrollY: '300px', // Menentukan tinggi scroll vertikal
+        scrollY: '400px', // Menentukan tinggi scroll vertikal
       scrollCollapse: true // Mengaktifkan pengguliran saat konten tabel kurang dari tinggi scroll
     } );
 } );

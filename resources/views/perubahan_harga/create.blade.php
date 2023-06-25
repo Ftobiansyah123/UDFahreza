@@ -17,11 +17,13 @@
                         @csrf
                         <div class="from-group">
                             
-                    
+
+                       
+
                         <div class="col">
                             <label for="namabarang" class="form-label">Nama Barang</label>
-                            <select name="idbarang" id="idbarang" class="form-control @error('idbarang') is-invalid @enderror" >
-                                <option value="">--Barang--</option>
+                            <select name="idbarang" id="idbarang" class="idbarang form-control @error('idbarang') is-invalid @enderror" >
+                                <option value="">--Nama Barang--</option>
                                 @foreach ( $stock as $st)
                                 <option value="{{ $st->id }}" data-harga="{{ $st->harga }}">{{ $st->namabarang }}</option>
                                 @endforeach
@@ -31,10 +33,13 @@
                     <div class="alert alert-warning invalid-feedback" >{{ $message }}</div>
                     @enderror
                         </div>
+                        
+
+
                         <div class="mb-3">
-                                <label for="tgl" class="form-label">Tanggal</label>
-                                <input type="date" id="tgl" name="tgl" class="form-control @error('tgl') is-invalid @enderror" placeholder="masukan Tangal">
-                                @error('tgl')
+                                <label for="tanggal" class="form-label">Tanggal</label>
+                                <input type="date" id="tanggal" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" placeholder="masukan Tangal">
+                                @error('tanggal')
                     <div class="alert alert-warning invalid-feedback" >{{ $message }}</div>
                     @enderror
                         </div>
@@ -74,18 +79,22 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>    
 $(document).ready(function() {
-    // Ketika pilihan nama barang berubah
+    $('.idbarang').select2();
     $('#idbarang').change(function() {
         // Ambil harga lama dari atribut data-harga pada pilihan yang dipilih
         var harga = $(this).find(':selected').data('harga');
         // Isi nilai harga lama pada input harga_lama
         $('#harga_lama').val(harga);
     });
-});
-</script>
+        });  
+        
+</script> 
 
 
 @endsection

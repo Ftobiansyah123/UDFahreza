@@ -27,13 +27,22 @@
                             </select>
                             
                         </div>
-                        <div class="mb-3">
-                                <label for="bagian" class="form-label">Bagian</label>
-                                <input type="text" name="bagian" class="form-control" placeholder="masukan bagian" value="{{ is_null($pegawai) ? '' : $pegawai->bagian }}">
+                       
+                        <div class="col">
+                            <label for="iduser" class="form-label">Bagian</label>
+                            <select name="iduser" id="iduser" class="form-control" >
+                                <option value="" disabled selected>--Pilih User--</option>
+                                @foreach ( $user as $u)
+                                <option value="{{ $u->id }}" {{ $pegawai->iduser == $u->id ? 'selected' : ''   }} >{{ $u->bagian }}</option>
+                                @endforeach
+                                
+                            </select>
+                            
                         </div>
+
                         <div class="mb-3">
-                            <label for="nomortelepon" class="form-label">Nomor Telepon</label>
-                            <input type="text" name="nomortelepon" class="form-control" placeholder="masukan nomor elepon" value="{{ is_null($pegawai) ? '' : $pegawai->nomortelepon }}">
+                            <label for="nomortelpon" class="form-label">Nomor Telepon</label>
+                            <input type="text" name="nomortelpon" class="form-control" placeholder="masukan nomor elepon" value="{{ is_null($pegawai) ? '' : $pegawai->nomortelpon }}">
                            
                         </div>
                         

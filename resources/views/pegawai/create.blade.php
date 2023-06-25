@@ -19,7 +19,7 @@
                         <div class="col">
                             <label for="iduser" class="form-label">Nama Pegawai</label>
                             <select name="iduser" id="iduser" class="form-control @error('iduser') is-invalid @enderror" >
-                                <option value="" disabled selected>--Pilih User--</option>
+                                <option value="" disabled selected>--Pilih Nama--</option>
                                 @foreach ( $user as $u)
                                 <option value="{{ $u->id }}">{{ $u->name }}</option>
                                 @endforeach
@@ -29,17 +29,25 @@
                     <div class="alert alert-warning invalid-feedback" >{{ $message }}</div>
                     @enderror
                         </div>
-                        <div class="mb-3">
-                                <label for="bagian" class="form-label">Bagian</label>
-                                <input type="text" name="bagian" class="form-control @error('bagian') is-invalid @enderror" placeholder="masukan bagian">
-                                @error('bagian')
+
+                        <div class="col">
+                            <label for="iduser" class="form-label">Bagian</label>
+                            <select name="iduser" id="iduser" class="form-control @error('iduser') is-invalid @enderror" >
+                                <option value="" disabled selected>--Pilih Bagian--</option>
+                                @foreach ( $user as $u)
+                                <option value="{{ $u->id }}">{{ $u->bagian }}</option>
+                                @endforeach
+                                
+                            </select>
+                            @error('iduser')
                     <div class="alert alert-warning invalid-feedback" >{{ $message }}</div>
                     @enderror
                         </div>
+                        
                         <div class="mb-3">
-                            <label for="nomortelepon" class="form-label">Nomor Telepon</label>
-                            <input type="text" name="nomortelepon" class="form-control @error('nomortelepon') is-invalid @enderror" placeholder="masukan nomor telepon" >
-                            @error('nomortelepon')
+                            <label for="nomortelpon" class="form-label">Nomor Telepon</label>
+                            <input type="text" name="nomortelpon" class="form-control @error('nomortelpon') is-invalid @enderror" placeholder="masukan nomor telepon" >
+                            @error('nomortelpon')
                     <div class="alert alert-warning invalid-feedback" >{{ $message }}</div>
                     @enderror
                            

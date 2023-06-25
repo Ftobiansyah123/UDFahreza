@@ -10,7 +10,7 @@ class PegawaiController extends Controller
 {
   
     public function index(){
-        $pegawai = Pegawai::with(['user', 'bagian'])->get();
+        $pegawai = Pegawai::with(['user'])->get();
         return view('pegawai.index', compact('pegawai'));
     }
  
@@ -23,8 +23,7 @@ class PegawaiController extends Controller
 
          $request->validate([
             'iduser' => 'required',
-            'idbagian' => 'required',
-            'nomortelepon' => 'required',
+            'nomortelpon' => 'required',
             'alamat' => 'required',
            
 
@@ -37,9 +36,9 @@ class PegawaiController extends Controller
 
     public function edit($id){
         $user = User::all();
-        $bagian = Bagian::all();
+     
         $pegawai =Pegawai::find($id);
-        Return view('pegawai.edit', compact('pegawai','bagian', 'user'));
+        Return view('pegawai.edit', compact('pegawai', 'user'));
     }
 
     public function update(Request $request, $id){
@@ -52,7 +51,6 @@ class PegawaiController extends Controller
     public function destroy($id){
         $pegawai =Pegawai::find($id);
         $pegawai->delete();
-        
         return redirect()->route('pegawai');
     }
 

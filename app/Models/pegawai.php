@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pegawai extends Model
 {
     protected $table        = 'pegawai';
-    protected $fillable     = ['iduser', 'nomortelepon', 'alamat'];
+    protected $fillable     = ['iduser', 'nomortelpon', 'alamat'];
     public $timestamps       = true;
 
 
