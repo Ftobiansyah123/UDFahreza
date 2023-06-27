@@ -58,4 +58,23 @@ Route::get('hapus-perubahan_harga/{id}', [App\Http\Controllers\Perubahan_hargaCo
 Route::get('perubahan_harga-cetak', [App\Http\Controllers\Perubahan_hargaController::class, 'cetak_pdf'])->name('cetak_perubahan_harga.pdf');  
 Route::get('/perubahan_harga/autocomplete', [App\Http\Controllers\Perubahan_hargaController::class, 'autocomplete'])->name('perubahan_harga.autocomplete');
 
+
+//barang keluar routing
+Route::get('/barang_keluar', [App\Http\Controllers\Barang_keluarController::class, 'index'])->name('barang_keluar');
+Route::get('/Barang_keluar-create', [App\Http\Controllers\Barang_keluarController::class, 'create'])->name('barang_keluar.create');
+Route::post('/simpan-barang_keluar', [App\Http\Controllers\Barang_keluarController::class, 'store'])->name('simpan.barang_keluar');
+Route::get('edit-barang_keluar/{id}', [App\Http\Controllers\Barang_keluarController::class, 'edit'])->name('barang_keluar.edit');
+Route::post('/update-barang_keluar/{id}', [App\Http\Controllers\Barang_keluarController::class, 'update'])->name('barang_keluar.update');
+Route::get('hapus-barang_keluar/{id}', [App\Http\Controllers\Barang_keluarController::class,'destroy'])->name('barang_keluar.hapus');
+
+
+//barang masuk routing
+Route::get('/barang_masuk', [App\Http\Controllers\Barang_masukController::class, 'index'])->name('barang_masuk');
+Route::get('/Barang_masuk-create', [App\Http\Controllers\Barang_masukController::class, 'create'])->name('barang_masuk.create');
+Route::post('/simpan-barang_masuk', [App\Http\Controllers\Barang_masukController::class, 'store'])->name('simpan.barang_masuk');
+Route::get('edit-barang_masuk/{id}', [App\Http\Controllers\Barang_masukController::class, 'edit'])->name('barang_masuk.edit');
+Route::post('/update-barang_masuk/{id}', [App\Http\Controllers\Barang_masukController::class, 'update'])->name('barang_masuk.update');
+Route::get('hapus-barang_masuk/{id}', [App\Http\Controllers\Barang_masukController::class, 'destroy'])->name('barang_masuk.hapus');
+
+
 });

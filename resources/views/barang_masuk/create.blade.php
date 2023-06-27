@@ -34,13 +34,20 @@
                             <select name="idbarang" id="idbarang" class="form-control @error('idbarang') is-invalid @enderror" >
                                 <option value="" disabled selected>--Pilih Barang--</option>
                                 @foreach ( $stock as $st)
-                                <option value="{{ $st->id }}">{{ $st->namabarang }}</option>
+                                <option value="{{ $st->id }}" data-stok="{{ $st->stok }}">{{ $st->namabarang }}</option>
                                 @endforeach
                                 
                             </select>
                             @error('idbarang')
                     <div class="alert alert-warning invalid-feedback" >{{ $message }}</div>
                     @enderror
+                        </div>
+                           <div class="mb-3">
+                      
+                            <label for="stoklama" class="form-label">Stok Lama </label>
+                            <input type="number" id="stoklama" name="stoklama" class="form-control" readonly > 
+                        
+                           
                         </div>
                         <div class="mb-3">
                                 <label for="stok" class="form-label">Stok</label>
@@ -57,19 +64,13 @@
                     @enderror
                         </div>
 
-                        <div class="col">
-                            <label for="iduser" class="form-label">Nama Pegawai</label>
-                            <select name="iduser" id="iduser" class="form-control @error('iduser') is-invalid @enderror" >
-                                <option value="" disabled selected>--Pilih User--</option>
-                                @foreach ( $user as $u)
-                                <option value="{{ $u->id }}">{{ $u->name }}</option>
-                                @endforeach
-                                
-                            </select>
-                            @error('iduser')
-                    <div class="alert alert-warning invalid-feedback" >{{ $message }}</div>
-                    @enderror
-                        </div>
+                        <div class="mb-3">
+                      
+                      <label for="user" class="form-label">Pegawai Pengolah </label>
+                      <input type="text" id="iduser" name="iduser" value="{{ Auth::user()->name }} " class="form-control"  readonly > 
+                  
+                     
+                  </div>
                         
                         
                         <div class="mb-3">
@@ -98,5 +99,18 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>    
+$(document).ready(function() {
+    $('#idbarang').select2();
+    $('#idbarang').change(function() {
+        // Ambil harga lama dari atribut data-harga pada pilihan yang dipilih
+        var stok = $(this).find(':selected').data('stok');
+        // Isi nilai harga lama pada input harga_lama
+        $('#stoklama').val(stok);
+    });
+        });  
+        
+</script> 
 @endsection
  
