@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home')->with('status', 'nda login nah');
     }
+
+    public function office()
+    {
+        return view('Office')->with('status');
+    }
 }

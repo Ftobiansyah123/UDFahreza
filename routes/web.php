@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home')->with('status');
 });
-
+Route::get('/Office', [App\Http\Controllers\HomeController::class, 'Office'])->name('Office');
 Auth::routes();
 Route::middleware(['auth'])->group(function(){
 
@@ -76,5 +76,10 @@ Route::get('edit-barang_masuk/{id}', [App\Http\Controllers\Barang_masukControlle
 Route::post('/update-barang_masuk/{id}', [App\Http\Controllers\Barang_masukController::class, 'update'])->name('barang_masuk.update');
 Route::get('hapus-barang_masuk/{id}', [App\Http\Controllers\Barang_masukController::class, 'destroy'])->name('barang_masuk.hapus');
 
-
+//pos
+Route::get('/point-of-sales', [App\Http\Controllers\PenjualanController::class, 'index'])->name('point-of-sales');
+Route::post('/point-of-sales/add-to-cart',[App\Http\Controllers\PenjualanController::class, 'addToCart'])->name('point-of-sales.add-to-cart');
+Route::delete('/point-of-sales/remove-from-cart/{id}', [App\Http\Controllers\PenjualanController::class, 'removeItemFromCart'])->name('point-of-sales.remove-from-cart');
+Route::post('/point-of-sales/checkout', [App\Http\Controllers\PenjualanController::class, 'checkout'])->name('point-of-sales.checkout');
+Route::get('point-of-sales/printout/{noTransaksi}', [App\Http\Controllers\PenjualanController::class, 'printout'])->name('point-of-sales.printout');
 });

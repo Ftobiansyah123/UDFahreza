@@ -23,6 +23,7 @@
                                     <th>Nama Pegawai</th>
                                     <th>Keterangan</th>
                                     <th>Stok Masuk</th>
+                                    <th>Stok Tersedia</th>
                             
                                 
                                 </tr>
@@ -42,6 +43,7 @@
                                 <td>{{ $bm->user->name }}</td>
                                 <td>{{ $bm->keterangan }}</td>
                                 <td>{{ $bm->stok }}</td>
+                                <td>{{ $bm->stock->stok }}</td>
                                
                             </tr>
                             @endforeach</tbody>
