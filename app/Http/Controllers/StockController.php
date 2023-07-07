@@ -13,8 +13,8 @@ class StockController extends Controller
      */
     public function index()
     {
-       $stock=Stock::all();
-      return view('stock.index', compact('stock'));
+        $stock=Stock::all();
+        return view('stock.index', compact('stock'));
     }
 
     /**
@@ -22,7 +22,7 @@ class StockController extends Controller
      */
     public function create()
     {
-       return view('stock.create');
+        return view('stock.create');
     }
 
     /**
@@ -30,20 +30,20 @@ class StockController extends Controller
      */
     public function store(StorestockRequest $request)
     {
-      $request->validate([
-            'nomorbarang' => 'required',
-            'namabarang' => 'required',
-            'merek' => 'required',
-            'satuan' => 'required',
-            'harga' => 'required',
-            'stok' => 'required',
+        $request->validate([
+              'nomorbarang' => 'required',
+              'namabarang' => 'required',
+              'merek' => 'required',
+              'satuan' => 'required',
+              'harga' => 'required',
+              'stok' => 'required',
 
 
-        ]);
+          ]);
 
-        
+
         Stock::create($request->all());
-      
+
         return redirect()->route('stock');
     }
 
@@ -58,20 +58,35 @@ class StockController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-   public function edit($id){
+    public function edit($id)
+    {
         $stock =Stock::find($id);
-        Return view('stock.edit', compact('stock'));
+        return view('stock.edit', compact('stock'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $stock =Stock::find($id);
         $stock->update($request->all());
         return redirect()->route('stock');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $stock =Stock::find($id);
         $stock->delete();
         return redirect()->route('stock');
+    }
+    public function cetak_pdf()
+    {
+        $today = Carbon::now()->isoFormat('
+        DD-MMMM-Y');
+        $stock = Stock::all(); // replace with your own data
+
+
+        $pdf = Pdf::loadView('cetak.stock', compact('stock', 'today'));
+
+        return $pdf->stream('cetak_stock.pdf');
+
     }
 }

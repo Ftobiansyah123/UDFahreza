@@ -8,6 +8,7 @@
                 <div class="card-header">
                     {{ __('Data Barang Keluar') }}
                     <a href={{ route('barang_keluar.create') }} class="btn btn-sm btn-primary float-end">  <i class="fa-solid fa-circle-plus fa-beat" ></i>Tambah Data</a>
+                    <a href={{ route('barang_keluar.preview') }} class="btn btn-sm btn-success float-md-right "><i class="fa-solid fa-print"></i> Cetak</a>
                    
                 </div>
 
@@ -20,7 +21,7 @@
                                 <th>Stok</th>
                                 <th>Tanggal Keluar</th>
                                 <th>Nama Penerima</th>
-                                <th>Aksi</th>
+                           
                                
                             </tr></thead> 
                         <tbody> @php
@@ -34,10 +35,7 @@
                                 <td>{{ $bk->tanggalkeluar }}</td>
                                 <td>{{ $bk->user->name }}</td>
                                 
-                                <td>
-                                
-                            
-                                </td>
+                              
                             </tr>
                             @endforeach</tbody>
                         <tfoot></tfoot>   

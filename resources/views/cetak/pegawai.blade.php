@@ -47,8 +47,8 @@
                             <tr>
                             <td>{{ $id++ }}</td>
                             <td>{{ $pg->user->name }}</td>
-                            <td>{{ $pg->bagian }}</td>
-                            <td>{{ $pg->nomortelepon }}</td>
+                            <td>{{ $pg->user->bagian }}</td>
+                            <td>{{ $pg->nomortelpon }}</td>
                             <td>{{ $pg->alamat }}</td>
                             </tr>
                         @endforeach

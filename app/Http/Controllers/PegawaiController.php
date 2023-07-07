@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\pegawai;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use PDF;
+use Illuminate\Support\Carbon;
 class PegawaiController extends Controller
 {
   
@@ -53,5 +54,16 @@ class PegawaiController extends Controller
         $pegawai->delete();
         return redirect()->route('pegawai');
     }
+      public function cetak_pdf()
+    {
+     $today = Carbon::now()->isoFormat('DD MMMM Y');
+        $pegawai = pegawai::all(); // replace with your own data
+
+        $pdf = PDF::loadView('cetak.pegawai',compact('pegawai', 'today') );
+        return $pdf->stream('cetak_pegawai.pdf');
+
+    
+        
+}
 
 }

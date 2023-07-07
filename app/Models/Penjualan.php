@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Penjualan extends Model
 {
     protected $table        = 'penjualan';
-    protected $fillable     = [ 'noTransaksi', 'idbarang', 'tanggaljual', 'iduser', 'hargaAkhir', 'kuantitas'];
+    protected $fillable     = [ 'noTransaksi', 'idbarang', 'iduser', 'hargaAkhir', 'kuantitas'];
     public $timestamps       = true;
     public function stock() {
     return $this->belongsTo(Stock::class, 'idbarang', 'id');

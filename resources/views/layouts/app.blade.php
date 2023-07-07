@@ -206,6 +206,23 @@
     } );
 } );
 	</script>
+    <script>
+      // Fungsi untuk mengonversi nilai angka ke format uang
+      function formatCurrency(element) {
+        const textPriceDetail = element.textContent;
+        const number = parseInt(textPriceDetail.replace(/[^0-9]/g, ""));
+        const formattedNumber = "Rp. " + number.toLocaleString("id-ID", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        element.textContent = formattedNumber;
+      }
+
+      // Ambil semua elemen dengan class "price-detail"
+      const formatPriceDetails = document.querySelectorAll(".price-detail");
+
+      // Panggil fungsi formatCurrency untuk setiap elemen
+      formatPriceDetails.forEach((element) => {
+        formatCurrency(element);
+      });
+    </script>
    
 		
 </html>

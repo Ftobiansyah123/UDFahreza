@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('merek', 220);
             $table->string('satuan', 10);
             $table->unsignedInteger('harga');
+            $table->unsignedInteger('hargaJual');
             $table->text('deskripsi');
             $table->unsignedInteger('stok');
             $table->timestamps();

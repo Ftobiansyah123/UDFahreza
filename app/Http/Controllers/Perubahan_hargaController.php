@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Perubahan_harga;
 use App\Models\Stock;
+use PDF;
 use Illuminate\Http\Request;
 
 class Perubahan_hargaController extends Controller
@@ -57,5 +58,32 @@ class Perubahan_hargaController extends Controller
         $perubahan_harga =Perubahan_harga::find($id);
         $perubahan_harga->delete();
         return redirect()->route('perubahan_harga');
+    }
+    public function preview()
+    {
+        
+        $perubahan_harga = Perubahan_harga::with(['stock'])->get(); // replace with your own data
+        return view('perubahan_harga.preview', compact('perubahan_harga'));
+            
+        
+            
+    }
+  
+        
+            
+   
+    public function cetakPDF(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Mendapatkan data perubahan harga berdasarkan periode yang dipilih
+        $perubahan_harga = Perubahan_harga::whereBetween('tanggal', [$start_date, $end_date])->get();
+    
+        
+        $pdf = PDF::loadView('cetak.perubahan_harga', compact('perubahan_harga', 'start_date', 'end_date'));
+        return $pdf->download('cetak_perubahan_harga.pdf');
+    
+        
     }
 }

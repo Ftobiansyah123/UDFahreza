@@ -8,6 +8,7 @@
                 <div class="card-header">
                     {{ __('Data Barang Masuk') }}
                     <a href={{ route('barang_masuk.create') }} class="btn btn-sm btn-primary float-end"><i class="fa-solid fa-circle-plus fa-beat"></i>Tambah Data</a>
+                    <a href={{ route('barang_masuk.preview') }} class="btn btn-sm btn-success float-md-right "><i class="fa-solid fa-print"></i> Cetak</a>
                    
                 </div>
 

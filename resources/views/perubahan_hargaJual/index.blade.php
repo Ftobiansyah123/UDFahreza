@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Data Perubahan harga') }}
-                    <a href={{ route('perubahan_harga.create') }} class="btn btn-sm btn-primary float-end"><i class="fa-solid fa-circle-plus fa-beat"></i>Tambah Data</a>
-                    <a href={{ route('perubahan_harga.preview') }} class="btn btn-sm btn-success float-md-right "><i class="fa-solid fa-print"></i> Cetak</a>
+                    <a href={{ route('perubahan_hargaJual.create') }} class="btn btn-sm btn-primary float-end"><i class="fa-solid fa-circle-plus fa-beat"></i> Tambah Data</a>
+                    <a href={{ route('perubahan_hargaJual.preview') }} class="btn btn-sm btn-success float-md-right "><i class="fa-solid fa-print"></i> Cetak</a>
                    
                 </div>
 
@@ -16,15 +16,16 @@
                     <div class="table-responsive">
                         <table id="data-tabel" class="table table-bordered text-sm-right">
                             
-                        <thead><tr>
+                        <thead class="table-primary">
+                            <tr>
 
                                
                                 <th>ID</th>
                                 <th>Nama Barang</th>
                                 <th>Merek</th>
                                 <th>Tanggal</th>
-                                <th>Harga Lama</th>
-                                <th>Harga Baru</th>
+                                <th>Harga Modal</th>
+                                <th>Harga Jual</th>
                               
                                
                             </tr>
@@ -40,8 +41,8 @@
                                 <td>{{ $ph->stock->namabarang }}</td>
                                 <td>{{ $ph->stock->merek }}</td>
                                 <td>{{ $ph->tanggal }}</td>
-                                <td>{{ $ph->harga_lama }}</td>
-                                <td>{{ $ph->harga_baru }}</td>
+                                <td>{{ $ph->harga_modal}}</td>
+                                <td>{{ $ph->harga_jual }}</td>
                             </tr>
                             @endforeach
                         </tbody>

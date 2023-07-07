@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Barang_keluar extends Model
 {
     protected $table        = 'barang-keluar';
-    protected $fillable     = ['idbarang', 'stok', 'tanggalkeluar', 'iduser', 'keterangan'];
+    protected $fillable     = ['idbarang', 'stok', 'tanggalkeluar', 'iduser', 'keterangan', 'token'];
     public $timestamps       = true;
 
 

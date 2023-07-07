@@ -12,9 +12,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('noTransaksi');
             $table->unsignedInteger('idbarang');
-            $table->date('tanggaljual');
+          
             $table->unsignedInteger('iduser');
-            $table->unsigneddecimal('hargaAkhir', 14, 2);
+            $table->unsigneddecimal('hargaAkhir', 14);
             $table->unsignedinteger('kuantitas')->default(0);
             $table->timestamps();
         });

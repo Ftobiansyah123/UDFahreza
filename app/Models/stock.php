@@ -9,7 +9,7 @@ class Stock extends Model
 {
     protected $table        = 'stock';
 
-    protected $fillable     = ['nomorbarang', 'namabarang', 'merek', 'satuan', 'harga', 'deskripsi', 'stok'];
+    protected $fillable     = ['nomorbarang', 'namabarang', 'merek', 'satuan', 'harga', 'hargaJual', 'deskripsi', 'stok'];
     public $timestamps = true;
 
     public function barang_masuk() {

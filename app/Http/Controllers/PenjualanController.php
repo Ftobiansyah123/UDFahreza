@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Penjualan;
 use App\Models\User;
+use App\Models\Barang_keluar;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 class PenjualanController extends Controller
 {
    
@@ -25,17 +27,21 @@ class PenjualanController extends Controller
             $cart = session()->get('cart', []);
 
             $stok = $request->input('stok') ?? 1; // Menggunakan nilai 1 jika stok tidak dimasukkan
-
+           
             if ($stok > $barang->stok) {
                 return redirect()->back()->with('error', 'Stok barang tidak mencukupi.');
             }
+            if ($barang->hargaJual == 0) {
+                return redirect()->back()->with('error', 'Masukkan harga jual terlebih dahulu.');
+            }
+        
 
             if (isset($cart[$barang->id])) {
                 $cart[$barang->id]['stok'] += $stok;
             } else {
                 $cart[$barang->id] = [
                     'nama' => $barang->namabarang,
-                    'harga' => $barang->harga,
+                    'hargaJual' => $barang->hargaJual,
                     'stok' => $stok
                 ];
             }
@@ -59,7 +65,7 @@ class PenjualanController extends Controller
         }
     
         public function checkout()
-        {
+        {   
             $cart = session()->get('cart');
             $user = Auth::user();
             $hargaAkhir = 0;
@@ -67,7 +73,7 @@ class PenjualanController extends Controller
         
             foreach ($cart as $id => $details) {
                 $barang = Stock::find($id);
-                $hargaAkhir += $barang->harga * $details['stok'];
+                $hargaAkhir += $barang->hargaJual * $details['stok'];
                 $barang->stok -= $details['stok'];
                 $barang->save();
         
@@ -75,10 +81,19 @@ class PenjualanController extends Controller
                     'noTransaksi' => $noTransaksi, // Menyimpan nomor transaksi yang sama pada setiap item
                     'idbarang' => $barang->id,
                     'iduser' => $user->id,
-                    'hargaAkhir' => $barang->harga * $details['stok'],
+                    'hargaAkhir' => $barang->hargaJual * $details['stok'],
                     'kuantitas' => $details['stok']
                 ]);
                 $penjualan->save();
+                $barangKeluar = new Barang_keluar([
+                    'idbarang' => $barang->id,
+                    'stok' => $details['stok'],
+                    'tanggalkeluar' => $penjualan['created_at'], // Menggunakan tanggal penjualan sebagai tanggal keluar
+                    'iduser' => $user->id,
+                    'keterangan' => 'Pembelian',
+                    'token' => $noTransaksi
+                ]);
+                $barangKeluar->save();
             }
         
             session()->forget('cart');
@@ -90,9 +105,32 @@ class PenjualanController extends Controller
         {
             
             $penjualan = Penjualan::where('noTransaksi', $noTransaksi)->get();
-            $today = Carbon::now()->isoFormat('DD MMMM Y');
+            $tanggalJual = $penjualan->first()->created_at->isoFormat('DD MMMM Y');
         
-            return view('point_of_sales.printout', compact('penjualan', 'noTransaksi', 'today'));
+            return view('point_of_sales.printout', compact('penjualan', 'noTransaksi', 'tanggalJual'));
+        }
+        public function indexEdit()
+        {
+            $posEdit = Penjualan::groupBy('noTransaksi')->get();
+            return view('point_of_sales.indexEdit', compact('posEdit'));
+        }
+         public function destroy($noTransaksi){
+        $penjualan =Penjualan::where('noTransaksi', $noTransaksi);
+        $penjualan->delete();
+        $barangKeluar =Barang_keluar::where('token', $noTransaksi);
+        $barangKeluar->delete();
+        return redirect()->route('point-of-sales.indexEdit');
+    }
+        public function cetak($noTransaksi)
+        {
+            
+            $penjualan = Penjualan::where('noTransaksi', $noTransaksi)->get();
+            $today = Carbon::now()->isoFormat('DD MMMM Y');
+            $tanggalJual = $penjualan->first()->created_at->isoFormat('DD MMMM Y');
+            $pdf = PDF::loadView('cetak.pos_pdf',compact( 'noTransaksi', 'penjualan', 'today', 'tanggalJual') );
+           
+     
+            return $pdf->download('cetak_pos.pdf');
         }
 
 }

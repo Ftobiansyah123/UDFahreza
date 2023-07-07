@@ -12,9 +12,7 @@
 </head>
 <body class="A4">
     <div class="page-header"></div>
-    <p>Dicetak pada:  @php
-       echo  $today;
-       @endphp</p>
+   
     <center>
     <h1>Toko UD FAHREZA</h1>
     <br>
@@ -28,14 +26,15 @@
         <div class="card-body">
         <div class="table-responsive">
                  
-                <table class="table table-sm table-striped table-bordered table-hover"" >
-                    <thead>
+                <table class="table table-bordered" >
+                    <thead class="table-primary">
                     <tr>
                                 <th>ID</th>
+                                <th>No. Token</th>
                                 <th>Nama Barang</th>
                                 <th>Stok</th>
                                 <th>Tanggal Keluar</th>
-                                <th>Nama Penerima</th>
+                                <th>Keterangan Perihal</th>
                              
                                
                             </tr>
@@ -47,10 +46,11 @@
                     @foreach ($barangkeluar as $bk)
                             <tr>
                                 <td>{{ $id++ }}</td>
+                                <td>{{ $bk->token }}</td>
                                 <td>{{ $bk->stock->namabarang }}</td>
                                 <td>{{ $bk->stok }}</td>
                                 <td>{{ $bk->tanggalkeluar }}</td>
-                                <td>{{ $bk->penerima }}</td>
+                                <td>{{ $bk->keterangan }}</td>
                             </tr>
                         @endforeach
                     </tbody>

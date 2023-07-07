@@ -25,7 +25,7 @@
       <br>
     </center>
     <center>
-      <h1>Laporan Perubahan Harga Moda</h1>
+      <h1>Laporan Perubahan Harga Jual Barang</h1>
     </center>
     <br>
   </div>
@@ -38,31 +38,29 @@
           <br>
           <table class="table table-bordered">
             <thead class="table-primary">
-                            <tr>
-                 		        <th>ID</th>
-                                <th>Nama Barang</th>
-                                <th>Tanggal</th>
-                                <th>Harga Lama</th>
-                                <th>Harga Baru</th>
-                            </tr>
+              <tr>
+                <th>ID</th>
+                <th>Nama Barang</th>
+                <th>Tanggal</th>
+                <th>Harga Modal</th>
+                <th>Harga Jual</th>
+              </tr>
             </thead>
             <tbody>
               @php
-                            $id = 1;
-                            @endphp
-                            @foreach ($perubahan_harga as $ph)
-                            <tr>
-                                <td>{{ $id++ }}</td>
-                                <td>{{ $ph->stock->namabarang }}</td>
-                                <td>{{ $ph->tanggal }}</td>
-                                <td>Rp. {{ $ph->harga_lama }}</td>
-                                <td>Rp. {{ $ph->harga_baru }}</td>
-                                
-                              
-                            </tr>
-                            @endforeach
+                $id = 1;
+              @endphp
+              @foreach ($perubahan_hargaJual as $ph)
+              <tr>
+                <td>{{ $id++ }}</td>
+                <td>{{ $ph->stock->namabarang }}</td>
+                <td>{{ $ph->tanggal }}</td>
+                <td class="price-detail">Rp. {{ $ph->harga_modal }}</td>
+                <td class="price-detail">Rp. {{ $ph->harga_jual }}</td>
+              </tr>
+              @endforeach
             </tbody>
-            
+           
           </table>
         </div>
       </div>

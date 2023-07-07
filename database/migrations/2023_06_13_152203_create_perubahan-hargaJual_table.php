@@ -8,14 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('barang-keluar', function (Blueprint $table) {
+        Schema::create('perubahan-hargaJual', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('idbarang');
-            $table->unsignedInteger('stok');
-            $table->date('tanggalkeluar');
-            $table->unsignedInteger('iduser');
-            $table->text('keterangan');
-            $table->string('token');
+            $table->date('tanggal');
+            $table->unsignedInteger('harga_modal');
+            $table->unsignedInteger('harga_jual');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('barang-keluar');
+        Schema::dropIfExists('perubahan-harga');
     }
 };

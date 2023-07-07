@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang_keluar;
 use App\Models\Stock;
 use App\Models\User;
+use PDF;
 use Illuminate\Http\Request;
 
 class Barang_keluarController extends Controller
@@ -61,4 +62,28 @@ class Barang_keluarController extends Controller
         return redirect()->route('barang_keluar');
     }
 
+    public function preview()
+    {
+        
+        $barangkeluar = Barang_keluar::with(['stock'])->get(); // replace with your own data
+        return view('barang_keluar.preview', compact('barangkeluar'));
+            
+        
+            
+    }
+  
+
+    public function cetakPDF(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Mendapatkan data perubahan harga berdasarkan periode yang dipilih
+        $barangkeluar = Barang_keluar::whereBetween('tanggalkeluar', [$start_date, $end_date])->get();
+    
+        
+        $pdf = PDF::loadView('cetak.barang_keluar', compact('barangkeluar', 'start_date', 'end_date'));
+        return $pdf->download('cetak_barang_keluar.pdf');
+
+    }
 }

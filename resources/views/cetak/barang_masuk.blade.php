@@ -19,9 +19,7 @@
 </head>
 <body class="A4">
     <div class="page-header"></div>
-    <p>Dicetak pada:  @php
-       echo  $today;
-       @endphp</p>
+   
     <center>
     <h1>Toko UD FAHREZA</h1>
     <br>
@@ -40,13 +38,14 @@
                     <thead>
                     <tr>
                                 
-                                <th>Nama Supplier</th>
+                                 <th>Nama Supplier</th>
                                 <th>Nama Barang</th>
                                 <th>Satuan</th>
                                 <th>Tanggal Masuk</th>
-                                <th>Nama Pegawai Penerima</th>
+                                <th>Nama Pegawai</th>
                                 <th>Keterangan</th>
-                               <th>Stok</th>
+                                <th>Stok gudang</th>
+                                <th>Stok Masuk</th>
                                
                             </tr>
                     </thead>
@@ -55,21 +54,22 @@
                     @foreach ($barangmasuk as $bm)
                             <tr>
                               
-                                <td>{{ $bm->supplier->namasupplier }}</td>
-                                <td>{{ $bm->stock->namabarang }}</td>
-                                <td>{{ $bm->stock->satuan }}</td>
-                                <td>{{ $bm->tanggalmasuk }}</td>
-                                <td>{{ $bm->user->name }}</td>
-                                <td>{{ $bm->keterangan }}</td>
-                                <td>{{ $bm->stok }}</td>
-                            
+                               <td>{{ $bm->supplier->namasupplier }}</td>
+                                                <td>{{ $bm->stock->namabarang }}</td>
+                                                <td>{{ $bm->stock->satuan }}</td>
+                                                <td>{{ $bm->tanggalmasuk }}</td>
+                                                <td>{{ $bm->user->name }}</td>
+                                                <td>{{ $bm->keterangan }}</td>
+                                                <td>{{ $bm->stock->stok }}</td>
+                                                <td>{{ $bm->stok }}</td>
+                                                
                             </tr>
                         @endforeach
                           
                             <tfoot>
 
                         <th >
-                                <td colspan="5" class="text-bold text-center "><b>Jumlah Barang Masuk</b></td>
+                                <td colspan="6" class="text-bold text-center "><b>Jumlah Barang Masuk</b></td>
                                 <td class=" text-bold text-end"><b>{{ $bm->sum('stok') }}</b></td>
                               
                                 </th>
