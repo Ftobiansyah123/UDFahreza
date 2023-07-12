@@ -5,16 +5,16 @@
         <div class="container">
                         <div class="page-header">
                             <br>
-                        <p>Dibuat pada :  {{$tanggalJual}}  </p>
+                        <p>Dibuat pada :  {{$tanggalbeli}}  </p>
                     
                         
                         <div>
-                            <center>
+                            {{-- <center>
                                 <a href={{ route('point-of-sales') }} class="btn btn-sm btn-warning"><i class="fa-solid fa-backspace"></i>kembali
                                 </a>
-                                <a href={{ route('pos.cetak', ['noTransaksi' => $noTransaksi]) }} class="btn btn-sm btn-primary "><i class="fa-solid fa-print fa-beat"></i>cetak
+                                <a href={{ route('pos.cetak', ['noTransaksi' => $noPembayaran]) }} class="btn btn-sm btn-primary "><i class="fa-solid fa-print fa-beat"></i>cetak
                                 </a>
-                            </center> 
+                            </center>  --}}
                         </div>
                         <div class="line_nota"></div>
                         <br>
@@ -25,12 +25,12 @@
                         <br>
                         </center>
                     
-                        <center>   <h1>FAKTUR PENJUALAN</h1></center>
+                        <center>   <h1>FAKTUR PEMBELIAN</h1></center>
                         <br>
                         <div class="container text-start">
                         <h3>
                         
-                            Nomor Faktur :   {{$noTransaksi}}
+                            Nomor PEMBELIAN :   {{$noPembelian}}
                         
                         </h3>
                     </div>
@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-12 ">
                             <div class="card-body">
-                                <
+                                
                             <div class="container">
                             <div class="line_nota"></div>
                             <div class="line_nota"></div>
@@ -58,22 +58,32 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                    @foreach($penjualan as $penjualanItem)
+                                    @php
+                                        $totalHarga = 0;
+                                    @endphp
+                                    @foreach($pembelian as $pembelianItem)
+                                
                                     <tr>
-                                        <td>{{ $penjualanItem->stock->nomorbarang }}</td> 
-                                        <td>{{ $penjualanItem->stock->namabarang }}</td>  
-                                        <td>{{ $penjualanItem->stock->merek }}</td>    
-                                        <td class="price-detail">{{ $penjualanItem->stock->hargaJual }}</td>   
-                                        <td>{{ $penjualanItem->kuantitas }}</td>
-                                        <td>{{ $penjualanItem->stock->satuan}}</td>
-                                        <td scope="col" class="text-end price-detail">{{ $penjualanItem->hargaAkhir }}</td>
+                                        <td>{{ $pembelianItem->stock->nomorbarang }}</td> 
+                                        <td>{{ $pembelianItem->stock->namabarang }}</td>  
+                                        <td>{{ $pembelianItem->stock->merek }}</td>    
+                                        <td class="price-detail">{{ $pembelianItem->hargaModal }}</td>   
+                                        <td>{{ $pembelianItem->stokMasuk }}</td>
+                                        <td>{{ $pembelianItem->stock->satuan}}</td>
+                                        <td scope="col" class="text-end price-detail">{{ $pembelianItem->hargaModal * $pembelianItem->stokMasuk }}</td>
                                     </tr>
-                                @endforeach
+                                    @php
+                                    $totalHarga += $pembelianItem->hargaModal * $pembelianItem->stokMasuk;
+                                @endphp
+                                    @endforeach 
                                 </tbody>
                                 <tfoot class="table-group-divider">
                                     <tr>
                                     <td colspan="6" class="text-bold text-center "><b>Jumlah Barang Masuk</b></td>
-                                    <td scope="col" class=" price-detail text-bold text-end"><b>{{ $penjualanItem->sum('hargaAkhir') }}</b></td>
+                                    
+                                      
+                                    <td scope="col" class="price-detail text-bold text-end"><b>{{ $totalHarga }}</b></td>
+                                   
                                     </tr>           
                                 </tfoot>
                             </table>

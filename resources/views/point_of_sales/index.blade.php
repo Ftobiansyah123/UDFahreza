@@ -25,7 +25,7 @@
                                 <table id="data-tabel" class="table table-group-divider table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Aksi</th>
+                                            <th class="text-center">QTY</th>
                                             <th>Nomor Barang</th>
                                             <th>Nama</th>
                                             <th>Merek</th>
@@ -41,7 +41,11 @@
                                                     @csrf
                                                     <input type="hidden" name="idbarang" value="{{ $br->id }}">
                                                     <input class="text-center" type="number" name="stok" min="1" max="{{ $br->stok }}" placeholder="1">
-                                                    <button class="btn btn-success" type="submit">Tambah</button>
+                                                    @if($br->hargaJual == 0)
+                                                        <button class="btn btn-success" type="submit" disabled>Tambah</button>
+                                                    @else
+                                                        <button class="btn btn-success" type="submit">Tambah</button>
+                                                    @endif
                                                 </form>
                                             </td>
                                             <td>{{ $br->nomorbarang }}</td>
@@ -59,7 +63,7 @@
                                 <div class="line_nota"></div>
                                 <div class="line_nota"></div>
                             </div>
-                            <!-- Tampilkan keranjang -->
+                                                    <!-- Tampilkan keranjang -->
                             <div class="col-4 p-3 mb-2" style="background-color: #ffd541">
                                 <h2 class="text-bg-secondary">Keranjang</h2>
                                 <div class="line_nota"></div>
@@ -80,7 +84,9 @@
                                         <tr>
                                             <td>{{ $details['nama'] }}</td>
                                             <td class="price-detail">{{ $details['hargaJual'] }}</td>
-                                            <td class="text-center">{{ $details['stok'] }}</td>
+                                            <td class="text-center">
+                                              {{ $details['stok'] }} 
+                                            </td>
                                             <td class="price-detail">{{ $details['hargaJual'] * $details['stok'] }}</td>
                                             <td>
                                                 <form action="{{ route('point-of-sales.remove-from-cart', $id) }}" method="POST">
@@ -99,6 +105,10 @@
                                 </form>
                                 @endif
                             </div>
+
+                      
+
+                          
                         </div>
                     </div>
                 </div>
@@ -106,4 +116,14 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.edit-qty', function() {
+            var id = $(this).data('id');
+            $('#qtyId').val(id);
+        });
+    });
+</script>
+
+
 @endsection

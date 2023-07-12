@@ -93,6 +93,7 @@ Route::get('point-of-sales/printout/{noTransaksi}', [App\Http\Controllers\Penjua
 Route::get('point-of-sales/edit', [App\Http\Controllers\PenjualanController::class, 'indexEdit'])->name('point-of-sales.indexEdit');
 Route::get('point-of-sales/delete/{noTransaksi}', [App\Http\Controllers\PenjualanController::class, 'destroy'])->name('point-of-sales.delete');
 Route::get('point-of-sales/pos_cetak_pdf/{noTransaksi}', [App\Http\Controllers\PenjualanController::class, 'cetak'])->name('pos.cetak');
+Route::post('/point-of-sales/update-qty',[App\Http\Controllers\PenjualanController::class, 'addToCart'])->name('point-of-sales.update-qty');
 
 
 
@@ -103,5 +104,12 @@ Route::post('/simpan-perubahan_hargaJual', [App\Http\Controllers\Perubahan_harga
 Route::get('hapus-perubahan_harga/{id}', [App\Http\Controllers\Perubahan_hargaJualController::class, 'destroy'])->name('perubahan_harga.hapus');
 Route::get('perubahan_hargaJual/preview', [App\Http\Controllers\Perubahan_hargaJualController::class, 'preview'])->name('perubahan_hargaJual.preview'); 
 Route::get('perubahan_hargaJual/cetakPDF', [App\Http\Controllers\Perubahan_hargaJualController::class, 'cetakPDF'])->name('perubahan_hargaJual.cetakPDF');  
+
+//pembelian
+Route::get('/pembelian_barang', [App\Http\Controllers\PembelianController::class, 'index'])->name('pembelian.index');
+Route::post('/pembelian_barang/add-to-cart',[App\Http\Controllers\PembelianController::class, 'addToCart'])->name('Pembelian.add-to-cart');
+Route::delete('/Pembelian/remove-from-cart/{id}', [App\Http\Controllers\PembelianController::class, 'removeItemFromCart'])->name('Pembelian.remove-from-cart');
+Route::post('/Pembelian/checkout', [App\Http\Controllers\PembelianController::class, 'checkout'])->name('Pembelian.checkout');
+Route::get('pembelian/printout/{noPembelian}', [App\Http\Controllers\PembelianController::class, 'printout'])->name('pembelian.printout');
 
 });

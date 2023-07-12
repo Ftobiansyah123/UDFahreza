@@ -17,7 +17,9 @@
     height: 6px;
 }
 </style>
-
+<div class=" text-md-center">
+    Halaman <span class="pagenum"></span>
+  </div>
 </head>
 <body class="container">
     <div class="page-header">
@@ -51,30 +53,34 @@
         <table class="table table-bordered ">
             <thead class=" table-primary">
                 <tr>
+                    <th>Nomor Barang</th>
                     <th>Nama Barang</th> 
                     <th>Merek</th>
+                    <th>Harga</th>
                     <th>Kuantitas</th>
                     <th>Satuan</th>
-                    <th class="text-end">Harga Akhir</th>
+                    <th class="text-end">Jumlah</th>
                 </tr>
             </thead>
             
             <tbody class="table-group-divider">
                 @foreach($penjualan as $penjualanItem)
                 <tr>
+                    <td class="text-center">{{ $penjualanItem->stock->nomorbarang }}</td> 
                     <td>{{ $penjualanItem->stock->namabarang }}</td>  
-                    <td>{{ $penjualanItem->stock->merek }}</td>      
-                    <td>{{ $penjualanItem->kuantitas }}</td>
+                    <td>{{ $penjualanItem->stock->merek }}</td>   
+                    <td>Rp. {{ format_uang($penjualanItem->stock->hargaJual) }}</td>    
+                    <td>{{ format_uang($penjualanItem->kuantitas) }}</td>
                     <td>{{ $penjualanItem->stock->satuan}}</td>
-                    <td scope="col" class="text-end price-detail">Rp. {{ $penjualanItem->hargaAkhir }}</td>
+                    <td class="text-end" >Rp. {{ format_uang($penjualanItem->hargaAkhir) }}</td>
                 </tr>
             @endforeach
             </tbody>
            
             <tfoot class="table-group-divider">
                 <tr>
-                <td colspan="4" class="text-bold text-center "><b>Jumlah Barang Masuk</b></td>
-                 <td scope="col" class=" price-detail text-bold text-end"><b>Rp. {{ $penjualanItem->sum('hargaAkhir') }}</b></td>
+                <td colspan="6" class="text-bold text-center "><b>Total </b></td>
+                 <td scope="col" class=" price-detail text-bold text-end"><b>Rp. {{ format_uang($penjualanItem->sum('hargaAkhir')) }}</b></td>
                 </tr>           
             </tfoot>
         </table>
@@ -101,8 +107,6 @@
     });
   </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<div class="footer text-md-center">
-    Halaman <span class="pagenum"></span>
-  </div>
+
 </body>
 </html

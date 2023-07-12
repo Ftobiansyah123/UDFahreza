@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Perubahan_harga extends Model
 {
     protected $table ='perubahan-harga';
-    protected $fillable = ['idbarang', 'tanggal', 'harga_lama', 'harga_baru'];
+    protected $fillable = ['idbarang', 'tanggal', 'harga_lama', 'harga_baru','token'];
     public $timestamps = true;
 
     public function stock() {

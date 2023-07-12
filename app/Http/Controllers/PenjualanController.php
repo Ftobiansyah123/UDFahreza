@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Penjualan;
 use App\Models\User;
+use App\Helpers\helpers;
 use App\Models\Barang_keluar;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -45,8 +46,9 @@ class PenjualanController extends Controller
                     'stok' => $stok
                 ];
             }
-
+         
             session()->put('cart', $cart);
+         
 
             return redirect()->back()->with('success', 'Barang berhasil ditambahkan ke keranjang.');
         }
@@ -90,7 +92,7 @@ class PenjualanController extends Controller
                     'stok' => $details['stok'],
                     'tanggalkeluar' => $penjualan['created_at'], // Menggunakan tanggal penjualan sebagai tanggal keluar
                     'iduser' => $user->id,
-                    'keterangan' => 'Pembelian',
+                    'keterangan' => 'Penjualan',
                     'token' => $noTransaksi
                 ]);
                 $barangKeluar->save();
@@ -126,6 +128,7 @@ class PenjualanController extends Controller
             
             $penjualan = Penjualan::where('noTransaksi', $noTransaksi)->get();
             $today = Carbon::now()->isoFormat('DD MMMM Y');
+           
             $tanggalJual = $penjualan->first()->created_at->isoFormat('DD MMMM Y');
             $pdf = PDF::loadView('cetak.pos_pdf',compact( 'noTransaksi', 'penjualan', 'today', 'tanggalJual') );
            

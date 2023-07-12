@@ -6,22 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+  public function up()
     {
-        Schema::create('penjualan', function (Blueprint $table) {
+        Schema::create('pembelian', function (Blueprint $table) {
             $table->id();
-            $table->string('noTransaksi', 220);
+            $table->string('noPembelian',220);
             $table->unsignedInteger('idbarang');
-          
+            $table->unsignedInteger('idsupplier');
             $table->unsignedInteger('iduser');
-            $table->unsigneddecimal('hargaAkhir', 14);
-            $table->unsignedinteger('kuantitas')->default(0);
+            $table->unsigneddecimal('hargaModal', 14);
+            $table->unsignedinteger('stokMasuk')->default(0);
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('penjualan');
+        Schema::dropIfExists('pembelian');
     }
 };

@@ -105,13 +105,23 @@ $(document).ready(function() {
     const hargaModalInput = document.getElementById('harga_modal');
     const hargaJualInput = document.getElementById('harga_jual');
 
-    persentaseInput.addEventListener('change', function() {
-        const persentase = parseFloat(persentaseInput.value);
+    persentaseInput.addEventListener('input', function(e) {
+        const persentase = parseFloat(e.target.value);
         const hargaModal = parseFloat(hargaModalInput.value);
         const hargaJual = hargaModal + (hargaModal * (persentase / 100));
 
         if (!isNaN(hargaJual)) {
             hargaJualInput.value = hargaJual.toFixed(2);
+        }
+    });
+
+    hargaJualInput.addEventListener('input', function(e) {
+        const hargaJual1 = parseFloat(e.target.value);
+        const hargaModal1 = parseFloat(hargaModalInput.value);
+        const persentase1 = ((hargaJual1-hargaModal1)/hargaModal1)* 100 ;
+
+        if (!isNaN(persentase1)) {
+            persentaseInput.value = persentase1.toFixed(2);
         }
     });
 </script>

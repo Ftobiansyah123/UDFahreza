@@ -16,5 +16,9 @@ class Supplier extends Model
         public function barang_masuk() {
             return $this->hasOne(Barang_masuk::class, 'idsupplier', 'id');
         }
+        public function pembelisn() {
+            return $this->hasOne(Pembelian::class, 'idsupplier', 'id');
+        }
+        
         
 }

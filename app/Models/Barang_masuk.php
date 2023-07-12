@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Barang_masuk extends Model
 {
     protected $table        = 'barang-masuk';
-    protected $fillable     = ['idsupplier', 'idbarang', 'stok',  'tanggalmasuk', 'iduser', 'keterangan'];
+    protected $fillable     = ['idsupplier', 'idbarang', 'stok',  'tanggalmasuk', 'iduser', 'keterangan','token'];
     public $timestamps       = true;
     public function stock() {
     return $this->belongsTo(Stock::class, 'idbarang', 'id');
