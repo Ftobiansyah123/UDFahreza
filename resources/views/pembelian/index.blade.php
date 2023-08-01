@@ -7,23 +7,31 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Data Pembelian') }}
-                
+                    <a href="{{ route('pembelian.indexEdit') }}"><i class="btn btn-success fa fa-house-chimney-user float-lg-end"> Data Pembelian</i></a>
                 </div>
                     
                 <div class="card-body">
                    
                             <br>
                     <div class="table-responsive">
-                        <table id="" class="table table-bordered text-sm-right">
+                        <table id="" class="table table-bordered text-sm-right ">
                                 <thead><tr>
                                     <form action="{{ route('Pembelian.add-to-cart') }}" method="post">
                                         @csrf
                                            
-                                        <select style="width: 190px" name="idsupplier" id="idsupplier" class="idsupplier form-control" >
+                                        <select style="width: 190px" name="idsupplier" id="idsupplier" class="idsupplier form-control @error('idsupplier') is-invalid @enderror" >
                                             <option value="" disabled selected>--Pilih Supplier--</option>
                                             @foreach ( $supplier as $sp)
                                             <option value="{{ $sp->id }}">{{ $sp->namasupplier }}</option>
                                             @endforeach
+                                        </select>
+                                    @error('idsupplier')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+
                                     <th>Nomor-Nama Barang</th>
                                     <th>Satuan</th>
                                     <th>Stock Tersedia</th>
@@ -40,19 +48,30 @@
                                
                                 <td>
                                     
-                                    <select style="width: 190px" name="idbarang" id="idbarang" class="idbarang form-control" >
+                                    <select style="width: 190px" name="idbarang" id="idbarang" class="idbarang form-control @error('idbarang') is-invalid @enderror" >
                                         <option value="" disabled selected>--Pilih Barang--</option>
                                         @foreach ( $stock as $st)
                                         <option  value="{{ $st->id }}"  data-harga="{{ $st->harga }}" data-satuan="{{  $st->satuan}}" data-stok="{{ $st->stok }}">{{ $st->namabarang }}</option>
                                         @endforeach
                                         
                                     </select>
+                                    @error('idbarang')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             
                                 </td>
                            
                                 <td> <input type="text" id="satuan" name="satuan" class="form-control" readonly ></td>
                                 <td><input type="number" id="stokModal" name="stokModal" class="form-control" readonly></td>
-                                <td> <input type="number" id="stok" name="stok" class="form-control"></td>
+                                <td> <input type="number" id="stok" name="stok" class="form-control @error('stok') is-invalid @enderror" >
+                                @error('stok')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                </td>
                                 <td> <input type="number" id="harga" name="harga" class="form-control"  >
                                 </td>  
                             </tr>

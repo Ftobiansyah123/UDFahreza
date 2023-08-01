@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Penjualan;
 use App\Models\User;
+use App\Models\Member;
 use App\Helpers\helpers;
 use App\Models\Barang_keluar;
 use Illuminate\Support\Carbon;
@@ -17,14 +18,15 @@ class PenjualanController extends Controller
         public function index()
         {
             $barang = Stock::all();
+            $member = Member::all();
     
-            return view('point_of_sales.index', compact('barang'));
+            return view('point_of_sales.index', compact('barang', 'member'));
         }
     
         public function addToCart(Request $request)
         {
             $barang = Stock::find($request->input('idbarang'));
-
+         
             $cart = session()->get('cart', []);
 
             $stok = $request->input('stok') ?? 1; // Menggunakan nilai 1 jika stok tidak dimasukkan
@@ -66,26 +68,35 @@ class PenjualanController extends Controller
             return redirect()->back()->with('success', 'Barang berhasil dihapus dari keranjang.');
         }
     
-        public function checkout()
+        public function checkout(Request $request)
         {   
             $cart = session()->get('cart');
             $user = Auth::user();
+            
             $hargaAkhir = 0;
             $noTransaksi = uniqid(); // Menghasilkan nomor transaksi unik
-        
+            $member = Member::find($request->input('member'));// Retrieve the selected member ID from the request
+            $discount = $member->discount / 100;
+           
+                
             foreach ($cart as $id => $details) {
                 $barang = Stock::find($id);
+               
                 $hargaAkhir += $barang->hargaJual * $details['stok'];
                 $barang->stok -= $details['stok'];
                 $barang->save();
-        
+              
+              
                 $penjualan = new Penjualan([
                     'noTransaksi' => $noTransaksi, // Menyimpan nomor transaksi yang sama pada setiap item
                     'idbarang' => $barang->id,
                     'iduser' => $user->id,
-                    'hargaAkhir' => $barang->hargaJual * $details['stok'],
-                    'kuantitas' => $details['stok']
+                    'idmember' => $member->id,
+                    'hargaAkhir' => ($barang->hargaJual * $details['stok'])-(($barang->hargaJual * $details['stok'])*$discount) ,
+                    'kuantitas' => $details['stok'],
+                   
                 ]);
+               
                 $penjualan->save();
                 $barangKeluar = new Barang_keluar([
                     'idbarang' => $barang->id,

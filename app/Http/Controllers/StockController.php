@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Stock;
+use Illuminate\Support\Carbon;
 use App\Http\Requests\StorestockRequest;
 use App\Http\Requests\UpdatestockRequest;
-
+use PDF;
 class StockController extends Controller
 {
     /**
@@ -84,7 +85,7 @@ class StockController extends Controller
         $stock = Stock::all(); // replace with your own data
 
 
-        $pdf = Pdf::loadView('cetak.stock', compact('stock', 'today'));
+        $pdf = PDF::loadView('cetak.stock', compact('stock', 'today'));
 
         return $pdf->stream('cetak_stock.pdf');
 

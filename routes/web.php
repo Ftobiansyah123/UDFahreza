@@ -13,13 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home')->with('status');
 });
+
+
+// routes/web.php
+
+
+
 Route::get('/Office', [App\Http\Controllers\HomeController::class, 'Office'])->name('Office');
+
 Auth::routes();
 Route::middleware(['auth'])->group(function(){
-
+    Route::get('/laba', [App\Http\Controllers\HomeController::class, 'laba'])->name('laba');
+    Route::get('/laba/search', [App\Http\Controllers\HomeController::class, 'search'])->name('laba.search');
+    Route::get('laba/cetak', [App\Http\Controllers\HomeController::class, 'cetakPDF'])->name('laba.cetak');  
+    
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/stock', [App\Http\Controllers\StockController::class, 'index'])->name('stock');
@@ -111,5 +121,35 @@ Route::post('/pembelian_barang/add-to-cart',[App\Http\Controllers\PembelianContr
 Route::delete('/Pembelian/remove-from-cart/{id}', [App\Http\Controllers\PembelianController::class, 'removeItemFromCart'])->name('Pembelian.remove-from-cart');
 Route::post('/Pembelian/checkout', [App\Http\Controllers\PembelianController::class, 'checkout'])->name('Pembelian.checkout');
 Route::get('pembelian/printout/{noPembelian}', [App\Http\Controllers\PembelianController::class, 'printout'])->name('pembelian.printout');
+Route::get('pembelian/delete/{noPembelian}', [App\Http\Controllers\PembelianController::class, 'destroy'])->name('pembelian.delete');
+Route::get('pembelian/pos_cetak_pdf/{noPembelian}', [App\Http\Controllers\PembelianController::class, 'cetak'])->name('pembelian.cetak');
+Route::get('pembelian/edit', [App\Http\Controllers\PembelianController::class, 'indexEdit'])->name('pembelian.indexEdit');
 
+//member
+Route::get('/member', [App\Http\Controllers\MemberController::class, 'index'])->name('member');
+Route::get('/member-create', [App\Http\Controllers\MemberController::class, 'create'])->name('member.create');
+Route::post('/simpan-member', [App\Http\Controllers\MemberController::class, 'store'])->name('simpan.member');
+Route::get('edit-member/{id}', [App\Http\Controllers\MemberController::class, 'edit'])->name('member.edit');
+Route::post('/update-member/{id}', [App\Http\Controllers\MemberController::class, 'update'])->name('member.update');
+Route::get('hapus-member/{id}', [App\Http\Controllers\MemberController::class, 'destroy'])->name('member.hapus');
+Route::get('member-cetak', [App\Http\Controllers\MemberController::class, 'cetak_pdf'])->name('cetak_member.pdf');  
+ 
+//pengeluaran
+Route::get('/pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'index'])->name('pengeluaran');
+Route::get('/pengeluaran-create', [App\Http\Controllers\PengeluaranController::class, 'create'])->name('pengeluaran.create');
+Route::post('/simpan-pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'store'])->name('simpan.pengeluaran');
+Route::get('edit-pengeluaran/{id}', [App\Http\Controllers\PengeluaranController::class, 'edit'])->name('pengeluaran.edit');
+Route::post('/update-pengeluaran/{id}', [App\Http\Controllers\PengeluaranController::class, 'update'])->name('pengeluaran.update');
+Route::get('hapus-pengeluaran/{id}', [App\Http\Controllers\PengeluaranController::class, 'destroy'])->name('pengeluaran.hapus');
+Route::get('pengeluaran-cetak', [App\Http\Controllers\PengeluaranController::class, 'cetak_pdf'])->name('cetak_pengeluaran.pdf');  
+ 
+//pengiriman
+Route::get('/pengiriman', [App\Http\Controllers\PengirimanController::class, 'index'])->name('pengiriman');
+Route::get('/pengiriman-create', [App\Http\Controllers\PengirimanController::class, 'create'])->name('pengiriman.create');
+Route::post('/simpan-pengiriman', [App\Http\Controllers\PengirimanController::class, 'store'])->name('simpan.pengiriman');
+Route::get('edit-pengiriman/{id}', [App\Http\Controllers\PengirimanController::class, 'edit'])->name('pengiriman.edit');
+Route::post('/update-pengiriman/{id}', [App\Http\Controllers\PengirimanController::class, 'update'])->name('pengiriman.update');
+Route::get('hapus-pengiriman/{id}', [App\Http\Controllers\PengirimanController::class, 'destroy'])->name('pengiriman.hapus');
+Route::get('pengiriman-cetak', [App\Http\Controllers\PengirimanController::class, 'cetak_pdf'])->name('cetak_pengiriman.pdf');  
+ 
 });

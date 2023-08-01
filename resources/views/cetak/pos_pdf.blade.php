@@ -80,7 +80,7 @@
             <tfoot class="table-group-divider">
                 <tr>
                 <td colspan="6" class="text-bold text-center "><b>Total </b></td>
-                 <td scope="col" class=" price-detail text-bold text-end"><b>Rp. {{ format_uang($penjualanItem->sum('hargaAkhir')) }}</b></td>
+                 <td scope="col" class=" price-detail text-bold text-end"><b>Rp. {{ format_uang($penjualanItem->hargaAkhir * $penjualanItem->kuantitas) }}</b></td>
                 </tr>           
             </tfoot>
         </table>

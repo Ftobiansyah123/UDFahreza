@@ -21,6 +21,10 @@ class Pembelian extends Model
         public function supplier() {
             return $this->belongsTo(Supplier::class, 'idsupplier', 'id');
         }
+       
+            public function pengiriman() {
+                return $this->hasOne(Pengiriman::class, 'datapengiriman', 'noPembelian');
+                }
 }
 
 

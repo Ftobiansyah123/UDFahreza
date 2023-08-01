@@ -27,6 +27,7 @@ class PembelianController extends Controller
             'idsupplier' => 'required',
             'harga' => 'required',
             'stok' => 'required',
+            'idsupplier' => 'required'
         ]);
         $stock = Stock::find($request->input('idbarang'));
         $supplier = Supplier::find($request->input('idsupplier'));
@@ -120,6 +121,13 @@ public function checkout()
     return redirect()->route('pembelian.printout', ['noPembelian' => $noPembelian])
         ->with('success', 'Pembayaran berhasil. Terima kasih atas pembelian Anda!');
 }  
+public function destroy($noPembelian){
+    $pembelian =Pembelian::where('noPembelian', $noPembelian);
+    $pembelian->delete();
+    $barangmasuk =Barang_masuk::where('token', $noPembelian);
+    $barangmasuk->delete();
+    return redirect()->route('pembelian.indexEdit');
+}
 public function printout($noPembelian)
         {
             
@@ -128,5 +136,10 @@ public function printout($noPembelian)
             $tanggalbeli = $pembelian->first()->created_at->isoFormat('DD MMMM Y');
            
             return view('pembelian.printout', compact('pembelian', 'noPembelian', 'tanggalbeli'));
+        }
+        public function indexEdit()
+        {
+            $pembelianEdit = Pembelian::groupBy('noPembelian')->get();
+            return view('pembelian.indexEdit', compact('pembelianEdit'));
         }
 }

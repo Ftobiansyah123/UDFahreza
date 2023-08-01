@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
-use Barryvdh\DomPDF\Facade\Pdf;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -47,14 +47,14 @@ class SupplierController extends Controller
         $supplier->delete();
         return redirect()->route('supplier');
     }
-    // public function cetak_pdf()
-    // {
-    //     $today = Carbon::now()->isoFormat('DD MMMM Y');
-    //     $supplier = Supplier::all(); // replace with your own data
+    public function cetak_pdf()
+    {
+        $today = Carbon::now()->isoFormat('DD MMMM Y');
+        $supplier = Supplier::all(); // replace with your own data
 
-    //     $pdf = Pdf::loadView('cetak.supplier',compact('supplier', 'today') );
+        $pdf = PDF::loadView('cetak.supplier',compact('supplier', 'today') );
      
-    //     return $pdf->stream('cetak_supplier.pdf');   
-    // }
+        return $pdf->stream('cetak_supplier.pdf');   
+    }
 
 }

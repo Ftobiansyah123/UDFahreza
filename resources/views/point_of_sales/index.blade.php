@@ -25,7 +25,7 @@
                                 <table id="data-tabel" class="table table-group-divider table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">QTY</th>
+                                            <th class="text-start">QTY</th>
                                             <th>Nomor Barang</th>
                                             <th>Nama</th>
                                             <th>Merek</th>
@@ -72,7 +72,7 @@
                                 <table class="tabel bg-light table-bordered table-striped-columns">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Nama</th>
+                                            <th class="text-start">Nama</th>
                                             <th>Harga</th>
                                             <th>QTY</th>
                                             <th>Total Harga</th>
@@ -101,6 +101,13 @@
                                 </table>
                                 <form action="{{ route('point-of-sales.checkout') }}" method="POST">
                                     @csrf
+                                    <label for="">Member</label>
+                                   <select name="member" id="member" class="form-control">
+                                    <option value="" disabled selected>--plih member--</option>
+                                    @foreach ($member as $m)
+                                    <option value="{{$m->id}}">{{$m->namamember}}</option>
+                                    @endforeach
+                                   </select>
                                     <button class="btn btn-primary" type="submit">Checkout</button>
                                 </form>
                                 @endif

@@ -121,7 +121,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="true" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand text-light"  href="{{ url('/') }}">
+                <a class="navbar-brand text-light"  href="{{ route('home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -130,7 +130,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
 
-                    <a class="navbar-brand text-light"  href="{{ url('/') }}">
+                    <a class="navbar-brand text-light"  href="{{ route('home') }}">
                       <i class="fa fa-home-lg"></i>
                   </a>
                     <!-- Right Side Of Navbar -->

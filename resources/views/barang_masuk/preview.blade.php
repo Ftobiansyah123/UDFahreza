@@ -34,7 +34,7 @@
                         <table class="table table-bordered">
                             <thead class="table-primary">
                               <tr>
-                                
+                                <th>Nomor Faktur</th>
                                 <th>Nama Supplier</th>
                                 <th>Nama Barang</th>
                                 <th>Satuan</th>
@@ -42,7 +42,7 @@
                                 <th>Nama Pegawai</th>
                                 <th>Keterangan</th>
                                 <th>Stok Masuk</th>
-                                <th>Stok Tersedia</th>
+                               
                         
                             
                             
@@ -63,7 +63,7 @@
                              
                                             <tr>
                                                 
-                                                
+                                                <td>{{ $bm->token }}</td>
                                                 <td>{{ $bm->supplier->namasupplier }}</td>
                                                 <td>{{ $bm->stock->namabarang }}</td>
                                                 <td>{{ $bm->stock->satuan }}</td>
@@ -71,7 +71,7 @@
                                                 <td>{{ $bm->user->name }}</td>
                                                 <td>{{ $bm->keterangan }}</td>
                                                 <td>{{ $bm->stok }}</td>
-                                                <td>{{ $bm->stock->stok }}</td>
+                                               
                                               
                                             </tr>
                                             @endforeach

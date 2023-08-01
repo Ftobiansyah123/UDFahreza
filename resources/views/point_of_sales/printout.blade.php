@@ -72,8 +72,8 @@
                                 </tbody>
                                 <tfoot class="table-group-divider">
                                     <tr>
-                                    <td colspan="6" class="text-bold text-center "><b>Jumlah Barang Masuk</b></td>
-                                    <td scope="col" class=" price-detail text-bold text-end"><b>{{ $penjualanItem->sum('hargaAkhir') }}</b></td>
+                                    <td colspan="6" class="text-bold text-center "><b>Jumlah</b></td>
+                                    <td scope="col" class=" price-detail text-bold text-end"><b>{{ $penjualanItem->hargaAkhir * $penjualanItem->kuantitas }}</b></td>
                                     </tr>           
                                 </tfoot>
                             </table>

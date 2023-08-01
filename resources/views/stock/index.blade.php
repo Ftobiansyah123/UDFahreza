@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Data Stock') }}
-                    {{-- <a href={{ route('stock.create') }} class="btn btn-sm btn-primary float-end"> <i class="fa-solid fa-circle-plus fa-beat"></i>Tambah Data</a>
-                    --}}
+                    <a href={{ route('stock.create') }} class="btn btn-sm btn-primary float-end"> <i class="fa-solid fa-circle-plus fa-beat"></i>Tambah Data</a>
+                   
                 </div>
 
                 <div class="card-body">
