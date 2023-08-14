@@ -1,0 +1,14 @@
+install xampp/php 8.1
+buat project laravel
+install composer
+install node js
+cmd ke path project 
+ketikan 
+-composer install
+-npm install
+atur nama database di .env
+buat database dengan nama yang sama di .env
+ketik di cmd 
+-php artisan migrate
+-php artisan serve
+
