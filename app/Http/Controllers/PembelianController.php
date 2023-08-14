@@ -9,6 +9,8 @@ use App\Models\Barang_masuk;
 use App\Models\Perubahan_harga;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use PDF;
 
 class PembelianController extends Controller
 {
@@ -142,4 +144,18 @@ public function printout($noPembelian)
             $pembelianEdit = Pembelian::groupBy('noPembelian')->get();
             return view('pembelian.indexEdit', compact('pembelianEdit'));
         }
+		 public function cetak($noPembelian)
+        {
+            
+            $pembelian = Pembelian::where('noPembelian', $noPembelian)->get();
+            $today = Carbon::now()->isoFormat('DD MMMM Y');
+           
+            $tanggalbeli = $pembelian->first()->created_at->isoFormat('DD MMMM Y');
+            $pdf = PDF::loadView('cetak.pembelian_pdf',compact( 'noPembelian', 'pembelian', 'today', 'tanggalbeli') );
+           
+     
+            return $pdf->download('cetak_pembelian.pdf');
+        }
+
+
 }

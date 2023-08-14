@@ -51,7 +51,7 @@
                             @foreach ($barangmasuk as $bm)
                             @php
                                 // Periksa apakah tanggal berada dalam periode yang dipilih
-                                $tanggalmasuk = \Carbon\Carbon::parse($bm->tangglamasuk);
+                                $tanggalmasuk = \Carbon\Carbon::parse($bm->tanggalmasuk);
                                 $start_date = \Carbon\Carbon::parse(request('start_date'));
                                 $end_date = \Carbon\Carbon::parse(request('end_date'));
 

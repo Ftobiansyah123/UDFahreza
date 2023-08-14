@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('noResi', 13);
             $table->string('datapengiriman', 30);
             $table->date('tanggal');
+			$table->text('alamat');
             $table->text('catatan');
             $table->timestamps();
         });

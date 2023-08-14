@@ -20,6 +20,7 @@
                                 <th>Nama Barang</th>
                                 <th>Stok</th>
                                 <th>Tanggal Keluar</th>
+								<th>Keterangan</th>
                                 <th>Nama Penerima</th>
                            
                                
@@ -33,9 +34,8 @@
                                 <td>{{ $bk->stock->namabarang }}</td>
                                 <td>{{ $bk->stok }}</td>
                                 <td>{{ $bk->tanggalkeluar }}</td>
-                                <td>{{ $bk->user->name }}</td>
-                                
-                              
+								<td>{{ $bk->keterangan }}</td>
+                                <td>{{ $bk->user->name }}</td>      
                             </tr>
                             @endforeach</tbody>
                         <tfoot></tfoot>   

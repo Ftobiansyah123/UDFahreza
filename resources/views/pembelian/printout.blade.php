@@ -9,12 +9,12 @@
                     
                         
                         <div>
-                            {{-- <center>
-                                <a href={{ route('point-of-sales') }} class="btn btn-sm btn-warning"><i class="fa-solid fa-backspace"></i>kembali
+                           <center>
+                                <a href={{ route('pembelian.index') }} class="btn btn-sm btn-warning"><i class="fa-solid fa-backspace"></i>kembali
                                 </a>
-                                <a href={{ route('pos.cetak', ['noTransaksi' => $noPembayaran]) }} class="btn btn-sm btn-primary "><i class="fa-solid fa-print fa-beat"></i>cetak
+                                <a href={{ route('pembelian.cetak', ['noPembelian' => $noPembelian]) }} class="btn btn-sm btn-primary "><i class="fa-solid fa-print fa-beat"></i>cetak
                                 </a>
-                            </center>  --}}
+                            </center>  
                         </div>
                         <div class="line_nota"></div>
                         <br>
@@ -48,6 +48,7 @@
                             <table class="table tabel-bordered text-center">
                                 <thead class=" table-primary">
                                     <tr>
+									<th>Nama Supplier</th>
                                         <th>Nomor Barang</th>
                                         <th>Nama Barang</th> 
                                         <th>Merek</th>
@@ -64,6 +65,7 @@
                                     @foreach($pembelian as $pembelianItem)
                                 
                                     <tr>
+										 <td>{{ $pembelianItem->supplier->namasupplier }}</td> 
                                         <td>{{ $pembelianItem->stock->nomorbarang }}</td> 
                                         <td>{{ $pembelianItem->stock->namabarang }}</td>  
                                         <td>{{ $pembelianItem->stock->merek }}</td>    
@@ -79,7 +81,7 @@
                                 </tbody>
                                 <tfoot class="table-group-divider">
                                     <tr>
-                                    <td colspan="6" class="text-bold text-center "><b>Jumlah Barang Masuk</b></td>
+                                    <td colspan="6" class="text-bold text-center "><b>Jumlah </b></td>
                                     
                                       
                                     <td scope="col" class="price-detail text-bold text-end"><b>{{ $totalHarga }}</b></td>

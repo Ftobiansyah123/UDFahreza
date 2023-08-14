@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layoutsOffice.app')
 
 @section('content')
 <div class="container">
@@ -12,12 +12,13 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="" class="table table-bordered text-sm-right">
+                        <table id="data-tabel" class="table table-bordered text-sm-right">
                         <thead><tr>
                                 <th>Aksi</th>
                                 <th>ID</th>
                                 <th>Nomor Pembelian</th>
                                 <th>Tanggal Pembelian</th>
+								<th>Supplier</th>
                                 <th>Pegawai Pemesan</th>
                                
                                
@@ -38,13 +39,13 @@
                                 <td>{{ $id++ }}</td>
                                 <td>{{ $pe->noPembelian}}</td>
                                 <td>{{ $pe->created_at }}</td>
+								<td>{{ $pe->supplier->namasupplier }}</td>
                                 <td>{{ $pe->user->name }}</td>
                                 
                             
                             </tr>
                             @endforeach</tbody>
-                        <tfoot></tfoot>   
-                        
+                 
                            
                         </table>
                     </div>

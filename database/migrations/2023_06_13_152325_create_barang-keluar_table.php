@@ -15,7 +15,7 @@ return new class extends Migration
             $table->date('tanggalkeluar');
             $table->unsignedInteger('iduser');
             $table->text('keterangan');
-            $table->string('token');
+           $table->string('token',220);
             $table->timestamps();
         });
     }

@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', function () {
     return view('home')->with('status');
+    });
+    Route::get('/home', function () {
+        return view('/')->with('status');
 });
 
 
@@ -31,6 +34,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('laba/cetak', [App\Http\Controllers\HomeController::class, 'cetakPDF'])->name('laba.cetak');  
     
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 
 Route::get('/stock', [App\Http\Controllers\StockController::class, 'index'])->name('stock');
 Route::get('/stock-create', [App\Http\Controllers\StockController::class, 'create'])->name('stock.create');
@@ -122,7 +126,7 @@ Route::delete('/Pembelian/remove-from-cart/{id}', [App\Http\Controllers\Pembelia
 Route::post('/Pembelian/checkout', [App\Http\Controllers\PembelianController::class, 'checkout'])->name('Pembelian.checkout');
 Route::get('pembelian/printout/{noPembelian}', [App\Http\Controllers\PembelianController::class, 'printout'])->name('pembelian.printout');
 Route::get('pembelian/delete/{noPembelian}', [App\Http\Controllers\PembelianController::class, 'destroy'])->name('pembelian.delete');
-Route::get('pembelian/pos_cetak_pdf/{noPembelian}', [App\Http\Controllers\PembelianController::class, 'cetak'])->name('pembelian.cetak');
+Route::get('pembelian/pembelian_cetak_pdf/{noPembelian}', [App\Http\Controllers\PembelianController::class, 'cetak'])->name('pembelian.cetak');
 Route::get('pembelian/edit', [App\Http\Controllers\PembelianController::class, 'indexEdit'])->name('pembelian.indexEdit');
 
 //member

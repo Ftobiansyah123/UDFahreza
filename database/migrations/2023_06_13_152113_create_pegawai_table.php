@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('iduser');
             $table->string('nomortelpon', 16);
             $table->string('alamat', 225);
+			$table->unsigneddeciimal('gaji',14.0);
             $table->timestamps();
         });
     }

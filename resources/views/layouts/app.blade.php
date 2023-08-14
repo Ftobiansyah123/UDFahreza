@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'UD FAHREZA') }}</title>
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -123,14 +124,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
 
-                    <form class="form-inline my-2 my-lg-0" style="margin-left: 138px;">
-						<div class="input-group">
-						  <input type="search" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-						  <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-						</div>
-                        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);  width:100%; padding-right: 30px;">
-						<i class="fa-solid fa-magnifying-glass" style="position:absolute; top:50%; Right:5%; transform:translate(0, -50%); font-size:15px;"></i> -->
-                    </form>
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav  ms-auto">
                         <!-- Authentication Links -->

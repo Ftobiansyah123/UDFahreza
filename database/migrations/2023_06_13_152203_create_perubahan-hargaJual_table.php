@@ -14,6 +14,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->unsignedInteger('harga_modal');
             $table->unsignedInteger('harga_jual');
+			$table->string('token',220);
             $table->timestamps();
         });
     }

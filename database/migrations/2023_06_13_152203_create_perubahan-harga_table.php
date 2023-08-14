@@ -14,6 +14,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->unsignedInteger('harga_lama');
             $table->unsignedInteger('harga_baru');
+		$table->string('token',220);
             $table->timestamps();
         });
     }
